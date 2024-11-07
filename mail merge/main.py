@@ -18,6 +18,7 @@ def get_files(filename):
             return contents
     except FileNotFoundError:
         print("File not found.")
+        sys.exit()
 
     
 def get_names(filename):
@@ -28,6 +29,7 @@ def get_names(filename):
             return data
     except FileNotFoundError:
         print("File not found.")
+        sys.exit()
     
 
 
@@ -39,13 +41,12 @@ def save_letters(letter,names):
         personal_letter = letter.replace("[name]", name)
         filename = f"{name}.txt"
         file_path =  os.path.join(r'C:\Users\LENOVO\Mail-merge\mail merge\ReadyToSend', filename)
-        with open(file_path, 'w') as f:
-        # with open((os.path.join('/path/to/Documents',completeName), "w"))
-            f.write(personal_letter)
-
-
-        
-
+        try:
+            with open(file_path, 'w') as f:
+                f.write(personal_letter)
+        except IOError:
+            print(f"Error occurred while writing to the file")
+            sys.exit()
 
 
 def main():
